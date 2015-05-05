@@ -1,6 +1,4 @@
 # -*- encoding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django import forms
 
 from base.form_utils import RequiredFieldForm
@@ -23,6 +21,20 @@ class ArticleForm(RequiredFieldForm):
             self.fields[name].widget.attrs.update(
                 {'class': 'pure-input-2-3'}
             )
+            import os
+            self.fields['picture'].label = 'Picture (currently "{}")'.format(
+                os.path.basename(self.instance.picture.file.name)
+            )
+            # http://stackoverflow.com/a/25631421
+            self.fields['picture'].widget.attrs.update(
+                {'style': "color:transparent;"}
+            )
+            self.fields['picture'].widget.attrs.update(
+                {'onchange': "this.style.color = 'black';"}
+            )
+
+
+
 
     class Meta:
         model = Article
