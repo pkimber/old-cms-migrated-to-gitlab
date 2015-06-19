@@ -6,6 +6,7 @@
 -e ../mail
 beautifulsoup4
 devpi-client
+django-debug-toolbar
 fabric
 factory-boy
 gitpython

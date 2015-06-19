@@ -1,6 +1,4 @@
 # -*- encoding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.conf import settings
 from django.conf.urls import (
     include,
@@ -33,6 +31,9 @@ urlpatterns = patterns(
     url(r'^settings/$',
         view=SettingsView.as_view(),
         name='project.settings'
+        ),
+    url(regex=r'^block/',
+        view=include('block.urls')
         ),
     url(regex=r'^cms/',
         view=include('cms.urls.cms')
