@@ -14,11 +14,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='CodeSnippet',
             fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', auto_created=True, serialize=False)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('modified', models.DateTimeField(auto_now=True)),
-                ('slug', models.SlugField(max_length=100)),
-                ('code', models.TextField()),
+                ('slug', models.SlugField(unique=True)),
+                ('code', models.TextField(blank=True)),
             ],
             options={
                 'verbose_name': 'Code Snippet',

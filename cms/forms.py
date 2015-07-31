@@ -17,13 +17,6 @@ from .models import (
 
 class CodeSnippetCreateForm(RequiredFieldForm):
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for name in ('code',):
-            self.fields[name].widget.attrs.update(
-                {'class': 'pure-input-2-3'}
-            )
-
     class Meta:
         model = CodeSnippet
         fields = (

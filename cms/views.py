@@ -64,7 +64,7 @@ class CodeSnippetCreateView(
     model = CodeSnippet
 
     def get_success_url(self):
-        return reverse('cms.code.snippet.create')
+        return reverse('cms.code.snippet.list')
 
 
 class CodeSnippetListView(
@@ -75,13 +75,13 @@ class CodeSnippetListView(
 
 
 class CodeSnippetUpdateView(
-        LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, CreateView):
+        LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, UpdateView):
 
     form_class = CodeSnippetUpdateForm
     model = CodeSnippet
 
     def get_success_url(self):
-        return reverse('cms.code.snippet.update')
+        return reverse('cms.code.snippet.list')
 
 
 class HeaderFooterUpdateView(

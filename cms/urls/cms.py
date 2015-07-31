@@ -34,7 +34,6 @@ urlpatterns = patterns(
         view=CodeSnippetCreateView.as_view(),
         name='cms.code.snippet.create'
         ),
-
     url(regex=r'^code/snippet/(?P<slug>[-\w\d]+)/edit/$',
         view=CodeSnippetUpdateView.as_view(),
         name='cms.code.snippet.update'

@@ -36,6 +36,7 @@
           <thead>
             <tr>
               <th>Snippet</th>
+              <th>Modified</th>
             </tr>
           </thead>
           <tbody>
@@ -46,6 +47,9 @@
                     <i class="fa fa-edit"></i>
                     {{ object.slug }}
                   </a>
+                </td>
+                <td>
+                  {{ object.modified|date:'d/m/Y H:i' }}
                 </td>
               </tr>
             {% endfor %}

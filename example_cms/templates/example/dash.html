@@ -1,0 +1,46 @@
+{% extends 'project/base.html' %}
+{% load staticfiles %}
+
+{% block sub_title %}
+  Example Dashboard
+{% endblock sub_title %}
+
+{% block sub_heading %}
+  Example Dashboard
+{% endblock sub_heading %}
+
+{% block stylesheets_extra %}
+  {% if snippet %}
+    <style type="text/css">
+      {{ snippet }}
+    </style>
+  {% endif %}
+{% endblock stylesheets_extra %}
+
+{% block content %}
+  <div class="pure-g">
+    <div class="pure-u-1">
+      <h4>Example Dashboard</h4>
+      <p>
+        This is an example page containing some text.
+      </p>
+      <p>
+        <a href="{% url 'cms.code.snippet.list' %}">
+          To change the style of this text, you can edit the CSS by clicking
+          here...
+        </a>
+      </p>
+      <p>
+        Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry. Lorem Ipsum has been the industry's standard dummy text ever
+        since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only
+        five centuries, but also the leap into electronic typesetting,
+        remaining essentially unchanged. It was popularised in the 1960s with
+        the release of Letraset sheets containing Lorem Ipsum passages, and
+        more recently with desktop publishing software like Aldus PageMaker
+        including versions of Lorem Ipsum.
+      </p>
+    </div>
+  </div>
+{% endblock content %}

@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 
 import reversion
@@ -12,12 +13,30 @@ from block.models import (
 )
 
 
+class CodeSnippetManager(models.Manager):
+
+    def create_code_snippet(self, slug, snippet):
+        obj = self.model(slug=slug, code=snippet)
+        obj.save()
+        return obj
+
+    def init_code_snippet(self, slug, snippet):
+        try:
+            obj = self.model.objects.get(slug=slug)
+            obj.snippet = snippet
+            obj.save()
+        except ObjectDoesNotExist:
+            obj = self.create_code_snippet(slug, snippet)
+        return obj
+
+
 class CodeSnippet(TimeStampedModel):
 
     CSS = 'css'
 
-    slug = models.SlugField(max_length=100)
-    code = models.TextField()
+    slug = models.SlugField(unique=True)
+    code = models.TextField(blank=True)
+    objects = CodeSnippetManager()
 
     class Meta:
         verbose_name = 'Code Snippet'

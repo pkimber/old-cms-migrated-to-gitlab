@@ -1,6 +1,4 @@
 # -*- encoding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.conf import settings
 from django.conf.urls import (
     include,
@@ -13,7 +11,10 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import RedirectView
 
-from .views import SettingsView
+from .views import (
+    DashView,
+    SettingsView,
+)
 
 admin.autodiscover()
 
@@ -27,7 +28,7 @@ urlpatterns = patterns(
         view=include(admin.site.urls)
         ),
     url(r'^home/user/$',
-        view=RedirectView.as_view(url=reverse_lazy('cms.page.list')),
+        view=DashView.as_view(),
         name='project.dash'
         ),
     url(r'^settings/$',

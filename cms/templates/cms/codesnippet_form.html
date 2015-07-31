@@ -17,3 +17,8 @@
     </div>
   </div>
 {% endblock content %}
+
+{% block script_extra %}
+  {{ block.super }}
+  {% include 'base/_codemirror.html' %}
+{% endblock script_extra %}
