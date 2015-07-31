@@ -12,6 +12,23 @@ from block.models import (
 )
 
 
+class CodeSnippet(TimeStampedModel):
+
+    CSS = 'css'
+
+    slug = models.SlugField(max_length=100)
+    code = models.TextField()
+
+    class Meta:
+        verbose_name = 'Code Snippet'
+        verbose_name_plural = 'Code Snippets'
+
+    def __str__(self):
+        return '{}'.format(self.slug)
+
+reversion.register(CodeSnippet)
+
+
 class HeaderFooter(SingletonModel):
 
     header = models.CharField(max_length=150)

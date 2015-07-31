@@ -1,0 +1,58 @@
+{% extends 'project/base.html' %}
+
+{% block sub_title %}
+  Code Snippets
+{% endblock sub_title %}
+
+{% block sub_heading %}
+  Code Snippets
+{% endblock sub_heading %}
+
+{% block content %}
+  {% if user.is_staff %}
+    <div class="pure-menu pure-menu-horizontal">
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a href="{% url 'project.settings' %}" class="pure-menu-link">
+            <i class="fa fa-reply"></i>
+          </a>
+        </li>
+        {% if user.is_superuser %}
+          <li class="pure-menu-item">
+            <a href="{% url 'cms.code.snippet.create' %}" class="pure-menu-link">
+              <i class="fa fa-file-code-o"></i>
+              Create
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  {% endif %}
+  <div class="pure-g">
+    <div class="pure-u-1">
+      <div class="l-box">
+        {% include 'base/_paginate.html' %}
+        <table class="pure-table pure-table-bordered">
+          <thead>
+            <tr>
+              <th>Snippet</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for object in object_list %}
+              <tr valign="top">
+                <td>
+                  <a href="{% url 'cms.code.snippet.update' object.slug %}">
+                    <i class="fa fa-edit"></i>
+                    {{ object.slug }}
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% include 'base/_paginate.html' %}
+      </div>
+    </div>
+  </div>
+{% endblock content %}

@@ -5,6 +5,9 @@ from django.conf.urls import (
 )
 
 from cms.views import (
+    CodeSnippetCreateView,
+    CodeSnippetListView,
+    CodeSnippetUpdateView,
     HeaderFooterUpdateView,
     PageCreateView,
     PageDeleteView,
@@ -23,6 +26,19 @@ from cms.views import (
 
 urlpatterns = patterns(
     '',
+    url(regex=r'^code/snippet/$',
+        view=CodeSnippetListView.as_view(),
+        name='cms.code.snippet.list'
+        ),
+    url(regex=r'^code/snippet/create/$',
+        view=CodeSnippetCreateView.as_view(),
+        name='cms.code.snippet.create'
+        ),
+
+    url(regex=r'^code/snippet/(?P<slug>[-\w\d]+)/edit/$',
+        view=CodeSnippetUpdateView.as_view(),
+        name='cms.code.snippet.update'
+        ),
     url(regex=r'^header-footer/$',
         view=HeaderFooterUpdateView.as_view(),
         name='cms.header.footer.update'
