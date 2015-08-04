@@ -8,16 +8,36 @@ from block.models import (
 )
 
 from .models import (
+    CodeSnippet,
     HeaderFooter,
     Template,
     TemplateSection,
 )
 
 
+class CodeSnippetCreateForm(RequiredFieldForm):
+
+    class Meta:
+        model = CodeSnippet
+        fields = (
+            'slug',
+            'code',
+        )
+
+
+class CodeSnippetUpdateForm(CodeSnippetCreateForm):
+
+    class Meta:
+        model = CodeSnippet
+        fields = (
+            'code',
+        )
+
+
 class HeaderFooterForm(RequiredFieldForm):
 
     def __init__(self, *args, **kwargs):
-        super(HeaderFooterForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         for name in ('header', 'url_facebook', 'url_linkedin', 'url_twitter'):
             self.fields[name].widget.attrs.update(
                 {'class': 'pure-input-2-3'}

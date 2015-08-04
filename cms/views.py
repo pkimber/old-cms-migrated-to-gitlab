@@ -23,6 +23,8 @@ from block.views import (
 )
 
 from .forms import (
+    CodeSnippetCreateForm,
+    CodeSnippetUpdateForm,
     HeaderFooterForm,
     PageEmptyForm,
     PageForm,
@@ -32,6 +34,7 @@ from .forms import (
     TemplateSectionForm,
 )
 from .models import (
+    CodeSnippet,
     HeaderFooter,
     Template,
     TemplateSection,
@@ -54,14 +57,31 @@ class CmsPageDesignView(PageDesignView):
         return context
 
 
-#class BaseMixin(BaseMixin):
-#
-#    def get_context_data(self, **kwargs):
-#        context = super(BaseMixin, self).get_context_data(**kwargs)
-#        context.update(dict(
-#            pages=Page.objects.menu(),
-#        ))
-#        return context
+class CodeSnippetCreateView(
+        LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, CreateView):
+
+    form_class = CodeSnippetCreateForm
+    model = CodeSnippet
+
+    def get_success_url(self):
+        return reverse('cms.code.snippet.list')
+
+
+class CodeSnippetListView(
+        LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, ListView):
+
+    model = CodeSnippet
+    paginate_by = 15
+
+
+class CodeSnippetUpdateView(
+        LoginRequiredMixin, StaffuserRequiredMixin, BaseMixin, UpdateView):
+
+    form_class = CodeSnippetUpdateForm
+    model = CodeSnippet
+
+    def get_success_url(self):
+        return reverse('cms.code.snippet.list')
 
 
 class HeaderFooterUpdateView(

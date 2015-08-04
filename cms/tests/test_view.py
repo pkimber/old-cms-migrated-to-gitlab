@@ -6,6 +6,7 @@ from login.tests.factories import (
     TEST_PASSWORD,
     UserFactory,
 )
+from .factories import CodeSnippetFactory
 
 
 class TestView(TestCase):
@@ -18,6 +19,22 @@ class TestView(TestCase):
                 password=TEST_PASSWORD
             )
         )
+
+    def test_code_snippet_list(self):
+        url = reverse('cms.code.snippet.list')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_code_snippet_create(self):
+        url = reverse('cms.code.snippet.create')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_code_snippet_update(self):
+        snippet = CodeSnippetFactory()
+        url = reverse('cms.code.snippet.update', args=[snippet.slug])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
 
     def test_page_list(self):
         url = reverse('cms.page.list')
