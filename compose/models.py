@@ -28,6 +28,12 @@ class Article(ContentModel):
         ('picture_only', 'Picture Only'),
     )
 
+    IMAGE_SIZE = (
+        ('1-2', 'Half Width'),
+        ('1-3', 'Third Width'),
+        ('1-4', 'Quarter Width'),
+    )
+
     block = models.ForeignKey(ArticleBlock, related_name='content')
     order = models.IntegerField()
 
@@ -38,6 +44,11 @@ class Article(ContentModel):
         max_length=12,
         choices=ARTICLE_TYPE_CHOICES,
         default='text_left',
+    )
+    image_size = models.CharField(
+        max_length=3,
+        choices=IMAGE_SIZE,
+        default='1-2',
     )
 
     class Meta:

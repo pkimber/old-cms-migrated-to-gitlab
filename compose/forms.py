@@ -36,6 +36,7 @@ class ArticleForm(RequiredFieldForm):
             'description',
             'picture',
             'article_type',
+            'image_size',
         )
         widgets = {
             'picture': forms.FileInput,

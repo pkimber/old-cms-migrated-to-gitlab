@@ -39,6 +39,7 @@ class TestView(TestCase):
             {
                 'title': 'pkimber.net',
                 'article_type': 'text_only',
+                'image_size': '1-3',
             }
         )
         self.assertEqual(response.status_code, 302)
@@ -58,6 +59,7 @@ class TestView(TestCase):
             {
                 'title': 'pkimber.net',
                 'article_type': 'text_only',
+                'image_size': '1-4',
             }
         )
         self.assertEqual(response.status_code, 302)
@@ -76,6 +78,7 @@ class TestView(TestCase):
             {
                 'title': 'pkimber.net',
                 'article_type': 'text_only',
+                'image_size': '1-2',
             }
         )
         self.assertEqual(response.status_code, 302)
