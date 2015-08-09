@@ -28,40 +28,38 @@
   {% endif %}
   <div class="pure-g">
     <div class="pure-u-1">
-      <div class="l-box">
-        {% include 'base/_paginate.html' %}
-        <table class="pure-table pure-table-bordered">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Model</th>
-              <th>Create URL</th>
+      {% include 'base/_paginate.html' %}
+      <table class="pure-table pure-table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Model</th>
+            <th>Create URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for object in object_list %}
+            <tr valign="top">
+              <td>
+                <a href="{% url 'cms.section.update' object.pk %}">
+                  <i class="fa fa-edit"></i>
+                  {{ object.name }}
+                  <small>({{ object.slug }})</small>
+                </a>
+              </td>
+              <td>
+                <small>{{ object.block_app }}.models.{{ object.block_model }}</small>
+              </td>
+              <td>
+                {% if object.create_url_name %}
+                  '{{ object.create_url_name }}'
+                {% endif %}
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {% for object in object_list %}
-              <tr valign="top">
-                <td>
-                  <a href="{% url 'cms.section.update' object.pk %}">
-                    <i class="fa fa-edit"></i>
-                    {{ object.name }}
-                    <small>({{ object.slug }})</small>
-                  </a>
-                </td>
-                <td>
-                  <small>{{ object.block_app }}.models.{{ object.block_model }}</small>
-                </td>
-                <td>
-                  {% if object.create_url_name %}
-                    '{{ object.create_url_name }}'
-                  {% endif %}
-                </td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        {% include 'base/_paginate.html' %}
-      </div>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% include 'base/_paginate.html' %}
     </div>
   </div>
 {% endblock content %}

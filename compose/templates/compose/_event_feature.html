@@ -1,0 +1,63 @@
+{% load block_tags %}
+{% load thumbnail %}
+{% load startswith %}
+
+<style>
+  .row {
+      margin-bottom: 20px;
+   }
+  .featurewrap {
+      width: 1000px;
+      margin: auto;
+   }
+  .event {
+    display: inline-block;
+    width: 32%;
+    vertical-align: top;
+    background: #efefef;
+    margin: 0.5%;
+  }
+  .event h3, .event div {
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+  .scale { 
+    max-width: 100%;
+  }
+  .centre {
+    margin: auto;
+    text-align: center;
+ }
+</style>
+
+<div class="row featurewrap">
+  {% for c in header_a_list %}
+    <div{% if c.css_class_name %} class="{{c.css_class_name}}"{% endif %}>{{ c.title }}</div>
+    {% if design %}<br>{% block_moderate c %}{% endif %}
+  {% empty %}
+      {% if design %}
+        {% block_add header_a_create_url 'header' %}
+      {% endif %}
+  {% endfor %}
+  {% for c in feature_a_list %}
+    <div{% if c.css_class_name %} class="{{c.css_class_name}}"{% endif %}>
+      {% if c.picture %}
+        {% if c.url %}<a href="{{ c.url }}" {% ifstartswith c.url 'http' %}target="_blank"{% endifstartswith %}>{% endif %}
+          <div style='width: 100%; margin: auto;'>
+            <div class="centre">
+              <img src="{% thumbnail c.picture 460x277 %}" alt="image" class="centre scale">
+            </div>
+          </div>
+        {% if c.url %}</a>{% endif %}
+      {% endif %}
+      <h3>{% if c.url %}<a href="{{ c.url }}" {% ifstartswith c.url 'http' %}target="_blank"{% endifstartswith %}>{% endif %}{{ c.title }}{% if c.url %}</a>{% endif %}</h3>
+      <div>
+        {% autoescape off %}
+          {{ c.description }}
+        {% endautoescape %}
+      </div>
+      {% if design %}{% block_moderate c %}{% endif %}
+    </div>
+  {% endfor %}
+</div><!-- /row -->
+{% if design %}{% block_add feature_a_create_url 'feature' %}{% endif %}

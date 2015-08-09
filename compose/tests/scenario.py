@@ -4,6 +4,7 @@ from block.models import (
     Page,
     PageSection,
     Section,
+    Url,
 )
 from cms.models import (
     Template,
@@ -72,3 +73,7 @@ def init_app_compose():
     # template
     template = Template.objects.init_template('compose/page_article.html')
     TemplateSection.objects.init_template_section(template, body)
+    Url.objects.init_pages()
+    # we wouldn't normally put protected views in the list of URLs
+    Url.objects.init_reverse_url('Dashboard', 'project.dash')
+    Url.objects.init_reverse_url('Settings', 'project.settings')

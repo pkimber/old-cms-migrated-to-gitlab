@@ -13,6 +13,7 @@ from block.models import (
 
 
 class HeaderFooter(SingletonModel):
+    """Move to ``block``?"""
 
     header = models.CharField(max_length=150)
     #footer_left = models.TextField(blank=True)
@@ -32,6 +33,7 @@ reversion.register(HeaderFooter)
 
 
 class TemplateManager(models.Manager):
+    """Move to ``block``?"""
 
     def create_template(self, template_name):
         template = self.model(template_name=template_name)
@@ -48,6 +50,7 @@ class TemplateManager(models.Manager):
 
 
 class Template(TimeStampedModel):
+    """Move to ``block``?"""
 
     template_name = models.CharField(
         max_length=150,
@@ -104,6 +107,7 @@ reversion.register(Template)
 
 
 class TemplateSectionManager(models.Manager):
+    """Move to ``block``?"""
 
     def create_template_section(self, template, section):
         template_section = self.model(template=template, section=section)
@@ -122,6 +126,7 @@ class TemplateSectionManager(models.Manager):
 
 
 class TemplateSection(TimeStampedModel):
+    """Move to ``block``?"""
 
     template = models.ForeignKey(Template)
     section = models.ForeignKey(Section)

@@ -32,61 +32,59 @@
   {% endif %}
   <div class="pure-g">
     <div class="pure-u-1">
-      <div class="l-box">
-        {% include 'base/_paginate.html' %}
-        <table class="pure-table pure-table-bordered">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Design</th>
-              <th>Type</th>
-              <th>Config</th>
-              <th>Delete</th>
+      {% include 'base/_paginate.html' %}
+      <table class="pure-table pure-table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Design</th>
+            <th>Type</th>
+            <th>Config</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for object in object_list %}
+            <tr valign="top">
+              <td>
+                <a href="{{ object.get_absolute_url }}">
+                  {% if object.deleted %}<del>{% endif %}
+                  {% if object.order %}
+                    {{ object.order }})
+                  {% endif %}
+                  {{ object.name }}
+                  {% if object.deleted %}</del>{% endif %}
+                </a>
+              </td>
+              <td>
+                <a href="{{ object.get_design_url }}">
+                  <i class="fa fa-edit"></i>
+                  Design
+                </a>
+              </td>
+              <td>
+                {% if object.is_home %}
+                  Home
+                {% endif %}
+                {% if object.is_custom %}
+                  Custom
+                {% endif %}
+              </td>
+              <td>
+                <a href="{% url 'cms.page.update' object.pk %}">
+                  <i class="fa fa-cog"></i>
+                </a>
+              </td>
+              <td>
+                <a href="{% url 'cms.page.delete' object.pk %}">
+                  <i class="fa fa-trash-o"></i>
+                </a>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {% for object in object_list %}
-              <tr valign="top">
-                <td>
-                  <a href="{{ object.get_absolute_url }}">
-                    {% if object.deleted %}<del>{% endif %}
-                    {% if object.order %}
-                      {{ object.order }})
-                    {% endif %}
-                    {{ object.name }}
-                    {% if object.deleted %}</del>{% endif %}
-                  </a>
-                </td>
-                <td>
-                  <a href="{{ object.get_design_url }}">
-                    <i class="fa fa-edit"></i>
-                    Design
-                  </a>
-                </td>
-                <td>
-                  {% if object.is_home %}
-                    Home
-                  {% endif %}
-                  {% if object.is_custom %}
-                    Custom
-                  {% endif %}
-                </td>
-                <td>
-                  <a href="{% url 'cms.page.update' object.pk %}">
-                    <i class="fa fa-cog"></i>
-                  </a>
-                </td>
-                <td>
-                  <a href="{% url 'cms.page.delete' object.pk %}">
-                    <i class="fa fa-trash-o"></i>
-                  </a>
-                </td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        {% include 'base/_paginate.html' %}
-      </div>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% include 'base/_paginate.html' %}
     </div>
   </div>
 {% endblock content %}

@@ -36,44 +36,42 @@
   {% endif %}
   <div class="pure-g">
     <div class="pure-u-1">
-      <div class="l-box">
-        {% include 'base/_paginate.html' %}
-        <table class="pure-table pure-table-bordered">
-          <thead>
-            <tr>
-              <th>Template</th>
-              <th>Sections</th>
+      {% include 'base/_paginate.html' %}
+      <table class="pure-table pure-table-bordered">
+        <thead>
+          <tr>
+            <th>Template</th>
+            <th>Sections</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for object in object_list %}
+            <tr valign="top">
+              <td>
+                <a href="{% url 'cms.template.update' object.pk %}">
+                  <i class="fa fa-edit"></i>
+                  {{ object.template_name }}
+                </a>
+              </td>
+              <td>
+                {% for template_section in object.templatesection_set.all %}
+                  <a href="{% url 'cms.template.section.remove' template_section.pk %}">
+                    <i class="fa fa-times"></i>
+                    {{ template_section.section.name }}
+                    <small>({{ template_section.section.block_app }}.models.{{ template_section.section.block_model }})</small>
+                  </a>
+                  <br />
+                {% endfor %}
+                <a href="{% url 'cms.template.section.create' object.pk %}">
+                  <i class="fa fa-plus"></i>
+                  Add section...
+                </a>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {% for object in object_list %}
-              <tr valign="top">
-                <td>
-                  <a href="{% url 'cms.template.update' object.pk %}">
-                    <i class="fa fa-edit"></i>
-                    {{ object.template_name }}
-                  </a>
-                </td>
-                <td>
-                  {% for template_section in object.templatesection_set.all %}
-                    <a href="{% url 'cms.template.section.remove' template_section.pk %}">
-                      <i class="fa fa-times"></i>
-                      {{ template_section.section.name }}
-                      <small>({{ template_section.section.block_app }}.models.{{ template_section.section.block_model }})</small>
-                    </a>
-                    <br />
-                  {% endfor %}
-                  <a href="{% url 'cms.template.section.create' object.pk %}">
-                    <i class="fa fa-plus"></i>
-                    Add section...
-                  </a>
-                </td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        {% include 'base/_paginate.html' %}
-      </div>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% include 'base/_paginate.html' %}
     </div>
   </div>
 {% endblock content %}

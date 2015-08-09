@@ -1,0 +1,65 @@
+{% extends 'project/base.html' %}
+
+{% block sub_title %}
+  Feature Styles
+{% endblock sub_title %}
+
+{% block sub_heading %}
+  Feature Styles
+{% endblock sub_heading %}
+
+{% block content %}
+  {% if user.is_staff %}
+    <div class="pure-menu pure-menu-horizontal">
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a href="{% url 'project.dash' %}" class="pure-menu-link">
+            <i class="fa fa-reply"></i>
+          </a>
+        </li>
+        {% if user.is_superuser %}
+          <li class="pure-menu-item">
+            <a href="{% url 'compose.feature.style.create' %}" class="pure-menu-link">
+              <i class="fa fa-file-code-o"></i>
+              Create Feature Style
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  {% endif %}
+  <div class="pure-g">
+    <div class="pure-u-1">
+      <div class="l-box">
+        {% include 'base/_paginate.html' %}
+        <table class="pure-table pure-table-bordered">
+          <thead>
+            <tr>
+              <th>Style Name</th>
+              <th>CSS Class</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for object in object_list %}
+              <tr valign="top">
+                <td>
+                  <a href="{% url 'compose.feature.style.update' object.pk %}">
+                    <i class="fa fa-edit"></i>
+                    {{ object.name }}
+                  </a>
+                </td>
+                <td>
+                  <a href="{% url 'compose.feature.style.update' object.pk %}">
+                    <i class="fa fa-edit"></i>
+                    {{ object.css_class_name }}
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% include 'base/_paginate.html' %}
+      </div>
+    </div>
+  </div>
+{% endblock content %}

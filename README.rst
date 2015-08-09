@@ -1,7 +1,8 @@
 CMS
 ***
 
-Django application for a simple CMS site
+Django application for a simple CMS site.  For documentation, see
+https://www.pkimber.net/open/app-cms.html
 
 Install
 =======

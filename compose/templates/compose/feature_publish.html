@@ -1,0 +1,54 @@
+{% extends "project/base.html" %}
+{% load thumbnail %}
+
+{% block sub_title %}
+  Publish content
+{% endblock sub_title %}
+
+{% block sub_heading %}
+  Publish content
+{% endblock sub_heading %}
+
+{% block content %}
+  <div class="pure-g">
+    <div class="pure-u-1">
+      <div class="l-box">
+        <table class="pure-table pure-table-bordered">
+          <tbody>
+            <tr valign="top">
+              <td><strong>Title</strong></td>
+              <td>{{ object.title|linebreaksbr }}</td>
+            </tr>
+            <tr valign="top">
+              <td><strong>Description</strong></td>
+                <td>
+                  {{ object.description|linebreaksbr }}
+                </td>
+            </tr>
+            <tr>
+              <td><strong>Link</strong></td>
+              <td>{{ object.url }}</td>
+            </tr>
+            {% if object.style %}
+              <tr valign="top">
+                <td><strong>Style</strong></td>
+                <td>{{ object.style }}</td>
+              </tr>
+            {% endif %}
+            {% if object.picture %}
+              <tr valign="top">
+                <td><strong>Picture</strong></td>
+                <td>
+                  <img src="{% thumbnail object.picture 100x60 crop %}" />
+                </td>
+              </tr>
+            {% endif %}
+          </tbody>
+        </table>
+        <div class="pure-u-1">
+          {% include '_form.html' with legend='Are you sure you want to publish this content?' submit='Publish' %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
