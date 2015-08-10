@@ -22,6 +22,8 @@ from block.views import (
     Section,
 )
 
+from compose.models import MenuItem
+
 from .forms import (
     HeaderFooterForm,
     PageEmptyForm,
@@ -38,11 +40,20 @@ from .models import (
 )
 
 
+
 class CmsPageView(PageView):
 
     def get_context_data(self, **kwargs):
         context = super(CmsPageView, self).get_context_data(**kwargs)
-        context.update(dict(header_footer=HeaderFooter.load()))
+        try:
+            main_menu_items = MenuItem.objects.filter(menu__slug='main', parent=None)
+        except:
+            main_menu_items = []
+        print ("MENU:", main_menu_items)
+        context.update(dict(
+            header_footer=HeaderFooter.load(),
+            main_menu_items=main_menu_items,
+        ))
         return context
 
 
@@ -50,7 +61,16 @@ class CmsPageDesignView(PageDesignView):
 
     def get_context_data(self, **kwargs):
         context = super(CmsPageDesignView, self).get_context_data(**kwargs)
-        context.update(dict(header_footer=HeaderFooter.load()))
+        try:
+            main_menu_items = MenuItem.objects.filter(menu__slug='main', parent=None)
+        except:
+            main_menu_items = []
+
+        print ("MENU:", main_menu_items)
+        context.update(dict(
+            header_footer=HeaderFooter.load(),
+            main_menu_items=main_menu_items
+        ))
         return context
 
 
