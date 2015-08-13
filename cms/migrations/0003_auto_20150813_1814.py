@@ -39,7 +39,7 @@ def _template_section(apps, schema_editor):
         template = block_template.objects.get(
             template_name=obj.template.template_name
         )
-        slug = block_section.objects.get(
+        section = block_section.objects.get(
             slug=obj.section.slug
         )
         instance = block(**dict(

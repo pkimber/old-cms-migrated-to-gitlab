@@ -37,9 +37,9 @@ urlpatterns = patterns(
     url(regex=r'^block/',
         view=include('block.urls')
         ),
-    #url(regex=r'^cms/',
-    #    view=include('cms.urls.cms')
-    #    ),
+    url(regex=r'^cms/',
+        view=include('cms.urls.cms')
+        ),
     url(regex=r'^compose/',
         view=include('compose.urls')
         ),
