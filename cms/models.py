@@ -124,7 +124,7 @@ class TemplateSectionManager(models.Manager):
 class TemplateSection(TimeStampedModel):
 
     template = models.ForeignKey(Template)
-    section = models.ForeignKey(Section)
+    section = models.ForeignKey(Section, related_name='template_section_section')
     objects = TemplateSectionManager()
 
     class Meta:
