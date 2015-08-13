@@ -59,4 +59,7 @@ class Article(ContentModel):
     def url_update(self):
         return reverse('compose.article.update', kwargs={'pk': self.pk})
 
+    def wizard_fields(self):
+        return []
+
 reversion.register(Article)
