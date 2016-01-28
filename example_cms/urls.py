@@ -34,6 +34,9 @@ urlpatterns = patterns(
         view=SettingsView.as_view(),
         name='project.settings'
         ),
+    url(regex=r'^block/',
+        view=include('block.urls')
+        ),
     url(regex=r'^cms/',
         view=include('cms.urls.cms')
         ),

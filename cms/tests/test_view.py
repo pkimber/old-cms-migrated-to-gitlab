@@ -20,6 +20,6 @@ class TestView(TestCase):
         )
 
     def test_page_list(self):
-        url = reverse('cms.page.list')
+        url = reverse('block.page.list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)

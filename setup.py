@@ -20,13 +20,8 @@ def get_readme():
 
 setup(
     name='kb-cms',
-    packages=['compose', 'compose.migrations', 'compose.tests', 'compose.management', 'compose.management.commands', 'cms', 'cms.templatetags', 'cms.urls', 'cms.migrations', 'cms.tests', 'cms.management', 'cms.management.commands'],
+    packages=['cms', 'cms.templatetags', 'cms.urls', 'cms.migrations', 'cms.tests', 'cms.management', 'cms.management.commands'],
     package_data={
-        'compose': [
-            'templates/*.*',
-            'templates/compose/*.*',
-        ],
-
         'cms': [
             'static/*.*',
             'static/cms/*.*',
@@ -38,7 +33,7 @@ setup(
             'templates/cms/*.*',
         ],
     },
-    version='0.0.27',
+    version='0.0.28',
     description='cms',
     author='Patrick Kimber',
     author_email='code@pkimber.net',
